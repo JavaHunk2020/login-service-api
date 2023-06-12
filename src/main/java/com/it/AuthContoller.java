@@ -11,8 +11,6 @@ import com.it.controller.AppResponse;
 import com.it.controller.UserDTO;
 import com.it.service.LoginService;
 
-import io.swagger.annotations.ApiKeyAuthDefinition;
-
 
 @RestController
 @RequestMapping("/v4")
@@ -28,6 +26,15 @@ public class AuthContoller {
 		loginService.findByUsername(userDTO.getUsername(), userDTO.getPassword());
 		appResponse.setCode("200");
 		appResponse.setMessage("Hey username and password are correct!");			
+		return appResponse;
+	}
+	
+	@PostMapping("/cauth")
+	public AppResponse cauthUser(@RequestBody UserDTO userDTO) {
+		AppResponse appResponse=new AppResponse();
+		loginService.save(userDTO);
+		appResponse.setCode("200");
+		appResponse.setMessage("Login is created");			
 		return appResponse;
 	}
 

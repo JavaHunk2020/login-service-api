@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.controller.UserDTO;
 import com.it.dao.LoginRepository;
 import com.it.dao.entity.Login;
 import com.it.dto.LoginDTO;
@@ -26,5 +27,12 @@ public class LoginService {
 		BeanUtils.copyProperties(optional.get(), loginDTO);
 		return loginDTO;
 	}
+	
+	public void save(UserDTO userDTO) {
+		Login login=new Login();
+		BeanUtils.copyProperties(userDTO, login);
+		loginRepository.save(login);
+	}
+
 
 }
